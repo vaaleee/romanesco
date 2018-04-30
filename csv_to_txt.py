@@ -7,14 +7,21 @@
 
 import sys
 import csv
+import re
 
-with open('happy_moments.csv', newline='') as csvfile, open('happy_moments.txt', 'w') as textfile:
+
+with open('happy_moments.csv', newline='') as csvfile, open('happy_moments_re.txt', 'w') as textfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
     for row in spamreader:
         if row:
             if row[0].isdigit():
                 try:
-                    textfile.write((row[3].replace('"', '')))
+                    sentence = re.sub(r'^\s*\"?', "", row[4], flags=re.UNICODE)
+                    sentence_clean = re.sub(r'\"?\s*$', "", sentence, flags=re.UNICODE)
+                    if len(sentence_clean) < 12:
+                        continue
+                    #textfile.write((row[4].replace('"', '')))
+                    textfile.write(sentence_clean)
                     textfile.write('\n')
                 except IndexError:
                     continue
