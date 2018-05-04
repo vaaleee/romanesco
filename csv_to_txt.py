@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-# Valentina Vogel
-# 16-708-919
+# Martina Stüssi & Valentina Vogel
+# 14-820-195 & 16-708-919
 
-import sys
+
 import csv
 import re
 
 
-with open('happy_moments.csv', newline='') as csvfile, open('happy_moments_re.txt', 'w') as textfile:
+with open('happy_moments.csv', newline='') as csvfile, open('happy_moments_def.txt', 'w') as textfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
     for row in spamreader:
         if row:
@@ -29,4 +29,7 @@ with open('happy_moments.csv', newline='') as csvfile, open('happy_moments_re.tx
                 continue
         else:
             continue
+
+
+
 
