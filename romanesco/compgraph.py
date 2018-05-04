@@ -18,8 +18,9 @@ def define_computation_graph(vocab_size: int, batch_size: int):
         embedding = tf.get_variable('word_embedding', [vocab_size, HIDDEN_SIZE])
         input_embeddings = tf.nn.embedding_lookup(embedding, inputs)
 
-    # drop out layer einbauen?
-    #class dropoutwrapper basic lstm cell als 1. parameter
+    # hier haben wir versucht, ein dropout layer zu implementieren
+    # (hinweis aus tutorat: class dropoutwrapper basic lstm cell als 1. parameter)
+    # sehr hilfreich dabei: https://medium.com/@erikhallstrm/using-the-dropout-api-in-tensorflow-2b2e6561dfeb
 
     with tf.name_scope('RNN'):
         cell = tf.nn.rnn_cell.BasicLSTMCell(HIDDEN_SIZE, state_is_tuple=True)
