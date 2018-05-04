@@ -18,9 +18,13 @@ def define_computation_graph(vocab_size: int, batch_size: int):
         embedding = tf.get_variable('word_embedding', [vocab_size, HIDDEN_SIZE])
         input_embeddings = tf.nn.embedding_lookup(embedding, inputs)
 
+    # drop out layer einbauen?
+    #class dropoutwrapper basic lstm cell als 1. parameter
+
     with tf.name_scope('RNN'):
         cell = tf.nn.rnn_cell.BasicLSTMCell(HIDDEN_SIZE, state_is_tuple=True)
         initial_state = cell.zero_state(batch_size, tf.float32)
+        cell = tf.nn.rnn_cell.DropoutWrapper(cell, output_keep_prob=0.8) #test
         rnn_outputs, rnn_states = tf.nn.dynamic_rnn(cell, input_embeddings, initial_state=initial_state)
 
     with tf.name_scope('Final_Projection'):
