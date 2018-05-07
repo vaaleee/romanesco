@@ -11,7 +11,7 @@ import re
 
 
 with open('happy_moments.csv', newline='') as csvfile, open('happy_moments_def.txt', 'w') as textfile:
-    spamreader = csv.reader(csvfile, delimiter=',', quotechar="")
+    spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
     for row in spamreader:
         if row:
             if row[0].isdigit():
